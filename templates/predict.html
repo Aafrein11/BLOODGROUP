@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Predict Blood Group</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <script>
+        function validateForm() {
+            const fileInput = document.getElementById('fingerprint');
+            if (!fileInput.files || !fileInput.files[0]) {
+                alert('Please select a fingerprint image before submitting.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Blood Group Prediction</h1>
+        <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <label for="fingerprint">Upload Fingerprint Image:</label>
+            <input type="file" name="fingerprint" id="fingerprint" accept="image/*" required>
+            <button type="submit" class="btn">Predict</button>
+        </form>
+        <a href="{{ url_for('home') }}" class="btn btn-back">Back to Home</a>
+    </div>
+</body>
+</html>
